@@ -7,5 +7,5 @@ const val BASE_URL: String = "https://api.edamam.com/api/"
 
 const val CONNECTION_TIMEOUT_SECONDS = 30L
 
-const val APP_ID = "1d45e424"
-const val API_KEY = "25ef3a62b686e9812439ff8cba9a6667"
+const val APP_ID = "47379841"
+const val API_KEY = "d28718060b8adfd39783ead254df7f92"

@@ -8,4 +8,5 @@
     <string name="calories">Calories</string>
     <string name="weight">Weight</string>
     <string name="btn_continue">Continue</string>
+    <string name="DETAILS_KEY">SummeryBottomSheet.NutritionDetails</string>
 </resources>

@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.nutritionanalysis.R
 import com.example.nutritionanalysis.databinding.FragmentHomeBinding
 import com.example.nutritionanalysis.extention.observe
 import com.example.nutritionanalysis.network.request.IngrRequest
@@ -42,8 +45,10 @@ class HomeFragment : Fragment() {
     private fun submit(ingr: MutableList<String>) = with(viewModel) {
         observe(loadDetails(IngrRequest(ingr))) {
             it?.let { response ->
-                val bottomSheet = SummeryBottomSheet.newInstance(response)
-                bottomSheet.show(childFragmentManager, "tag")
+                val args = bundleOf(
+                    getString(R.string.DETAILS_KEY) to response
+                )
+                findNavController().navigate(R.id.action_homeFragment_to_summeryFragment, args)
             }
 
         }

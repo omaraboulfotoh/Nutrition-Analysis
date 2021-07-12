@@ -3,8 +3,10 @@ package com.example.nutritionanalysis.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.nutritionanalysis.di.IODispatcher
+import com.example.nutritionanalysis.model.IngredientDetails
 import com.example.nutritionanalysis.network.data
 import com.example.nutritionanalysis.network.request.IngrRequest
+import com.example.nutritionanalysis.network.response.NutritionDetailsResponse
 import com.example.nutritionanalysis.network.usecase.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -22,5 +24,14 @@ class NutritionViewModel @Inject constructor(
             val result =
                 getCurrenciesUseCase(UseCases.GetNutritionDetailsUseCase.Params(request)).await()
             emit(result.data)
+        }
+
+    fun getSummery(response: NutritionDetailsResponse) =
+        liveData {
+            val summery: MutableList<IngredientDetails> = arrayListOf()
+            response.ingredients.forEach {
+                summery.add(it.details[0])
+            }
+            emit(summery)
         }
 }

@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@{item.weight}"
+            android:text="@{item.getWeightRounded}"
             android:textColor="@color/black" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 

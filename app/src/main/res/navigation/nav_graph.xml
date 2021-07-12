@@ -11,7 +11,19 @@
         android:name="com.example.nutritionanalysis.view.fragment.HomeFragment"
         android:label="MainFragment"
         tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_summeryFragment"
+            app:destination="@id/summeryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/summeryFragment"
+        android:name="com.example.nutritionanalysis.view.fragment.SummeryFragment"
+        android:label="SummeryFragment"
+        tools:layout="@layout/fragment_summery">
 
+        <argument
+            android:name="@string/DETAILS_KEY"
+            app:argType="com.example.nutritionanalysis.network.response.NutritionDetailsResponse" />
     </fragment>
 
 

@@ -1,25 +1,27 @@
 package com.example.nutritionanalysis.view.fragment
 
-import android.app.Dialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.nutritionanalysis.R
 import com.example.nutritionanalysis.databinding.FragmentSummeryBinding
+import com.example.nutritionanalysis.extention.observe
 import com.example.nutritionanalysis.network.response.NutritionDetailsResponse
-import com.example.nutritionanalysis.utiles.RoundedBottomSheetDialogFragment
 import com.example.nutritionanalysis.view.adapter.SummeryAdapter
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.example.nutritionanalysis.viewmodel.NutritionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SummeryBottomSheet : RoundedBottomSheetDialogFragment() {
+class SummeryFragment : Fragment() {
 
     private var _binding: FragmentSummeryBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
+    private val viewModel: NutritionViewModel by viewModels()
 
     private val response: NutritionDetailsResponse by lazy {
         arguments?.getSerializable(DETAILS_KEY) as NutritionDetailsResponse
@@ -28,20 +30,21 @@ class SummeryBottomSheet : RoundedBottomSheetDialogFragment() {
         SummeryAdapter()
     }
 
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val bottomSheet = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
-        val bottomView = View.inflate(context, R.layout.fragment_summery, null)
-        _binding = FragmentSummeryBinding.bind(bottomView)
-
-        bottomSheet.setOnShowListener {
-            bottomSheet.setContentView(binding.root)
-            bottomSheetBehavior = BottomSheetBehavior.from(bottomView.parent as View)
-            bottomSheetBehavior.peekHeight = BottomSheetBehavior.PEEK_HEIGHT_AUTO
-            initView()
-        }
-        return bottomSheet
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSummeryBinding.inflate(inflater, container, false)
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+        bindViewModel()
+    }
+
 
     private fun initView() {
 
@@ -50,12 +53,22 @@ class SummeryBottomSheet : RoundedBottomSheetDialogFragment() {
             adapter = summeryAdapter
             addItemDecoration(divider)
         }
+        binding.toolbar.getChildAt(0).setOnClickListener {   findNavController().popBackStack() }
+        binding.btnContinue.setOnClickListener {
+
+        }
+    }
+
+    private fun bindViewModel() = with(viewModel) {
+        observe(getSummery(response)) {
+            summeryAdapter.submitList(it)
+        }
     }
 
     companion object {
         private const val DETAILS_KEY = "SummeryBottomSheet.NutritionDetails"
-        fun newInstance(response: NutritionDetailsResponse): SummeryBottomSheet {
-            val fragment = SummeryBottomSheet()
+        fun newInstance(response: NutritionDetailsResponse): SummeryFragment {
+            val fragment = SummeryFragment()
             fragment.arguments = Bundle().apply {
                 putSerializable(DETAILS_KEY, response)
             }
