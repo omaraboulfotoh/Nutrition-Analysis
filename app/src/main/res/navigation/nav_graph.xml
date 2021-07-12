@@ -20,6 +20,19 @@
         android:name="com.example.nutritionanalysis.view.fragment.SummeryFragment"
         android:label="SummeryFragment"
         tools:layout="@layout/fragment_summery">
+        <action
+            android:id="@+id/action_summeryFragment_to_dailyBasisFragment"
+            app:destination="@id/dailyBasisFragment" />
+        <argument
+            android:name="@string/DETAILS_KEY"
+            app:argType="com.example.nutritionanalysis.network.response.NutritionDetailsResponse" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dailyBasisFragment"
+        android:name="com.example.nutritionanalysis.view.fragment.DailyBasisFragment"
+        android:label="dailyBasisFragment"
+        tools:layout="@layout/fragment_daily_basis">
 
         <argument
             android:name="@string/DETAILS_KEY"

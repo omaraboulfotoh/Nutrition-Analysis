@@ -11,9 +11,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.nutritionanalysis.R
 import com.example.nutritionanalysis.databinding.FragmentHomeBinding
 import com.example.nutritionanalysis.extention.observe
+import com.example.nutritionanalysis.extention.validate
 import com.example.nutritionanalysis.network.request.IngrRequest
 import com.example.nutritionanalysis.viewmodel.NutritionViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -39,7 +41,9 @@ class HomeFragment : Fragment() {
         binding.btnSubmit.setOnClickListener {
             submit(binding.etIngrs.text.toString().split("\n") as MutableList<String>)
         }
-
+        binding.etIngrs.validate {
+            binding.btnSubmit.isEnabled = it
+        }
     }
 
     private fun submit(ingr: MutableList<String>) = with(viewModel) {
