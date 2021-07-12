@@ -2,6 +2,7 @@ package com.example.nutritionanalysis.network.usecase
 
 import com.example.nutritionanalysis.network.FormRemoteDataSource
 import com.example.nutritionanalysis.network.Result
+import com.example.nutritionanalysis.network.request.IngrRequest
 import com.example.nutritionanalysis.network.response.NutritionDetailsResponse
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
@@ -20,10 +21,10 @@ class UseCases(
     ) : UseCase<GetNutritionDetailsUseCase.Params, NutritionDetailsResponse>() {
 
         override suspend fun doWork(params: Params): Result<NutritionDetailsResponse> {
-            return repository.getNutritionDetails(params.ingr)
+            return repository.getNutritionDetails(params.request)
         }
 
-        data class Params(val ingr: MutableList<String>)
+        data class Params(val request: IngrRequest)
     }
 
 

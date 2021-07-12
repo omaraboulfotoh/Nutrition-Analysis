@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.nutritionanalysis.databinding.FragmentHomeBinding
 import com.example.nutritionanalysis.extention.observe
+import com.example.nutritionanalysis.network.request.IngrRequest
 import com.example.nutritionanalysis.viewmodel.NutritionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,13 +34,17 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnSubmit.setOnClickListener {
-
+            submit(binding.etIngrs.text.toString().split("\n") as MutableList<String>)
         }
-        bindViewModel()
+
     }
 
-    private fun bindViewModel() = with(viewModel) {
-        observe(loadDetails()) {
+    private fun submit(ingr: MutableList<String>) = with(viewModel) {
+        observe(loadDetails(IngrRequest(ingr))) {
+            it?.let { response ->
+                val bottomSheet = SummeryBottomSheet.newInstance(response)
+                bottomSheet.show(childFragmentManager, "tag")
+            }
 
         }
     }

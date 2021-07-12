@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.nutritionanalysis.di.IODispatcher
 import com.example.nutritionanalysis.network.data
+import com.example.nutritionanalysis.network.request.IngrRequest
 import com.example.nutritionanalysis.network.usecase.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -16,10 +17,10 @@ class NutritionViewModel @Inject constructor(
     @IODispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    fun loadDetails() =
+    fun loadDetails(request: IngrRequest) =
         liveData {
             val result =
-                getCurrenciesUseCase(UseCases.GetNutritionDetailsUseCase.Params(arrayListOf())).await()
+                getCurrenciesUseCase(UseCases.GetNutritionDetailsUseCase.Params(request)).await()
             emit(result.data)
         }
 }

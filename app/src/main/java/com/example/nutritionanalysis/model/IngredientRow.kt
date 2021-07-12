@@ -1,3 +1,5 @@
 package com.example.nutritionanalysis.model
 
-data class IngredientRow(val label: String, val quantity: Double, val unit: String)
+import java.io.Serializable
+
+data class IngredientRow(val label: String, val quantity: Double, val unit: String): Serializable

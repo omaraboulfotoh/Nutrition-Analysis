@@ -2,6 +2,7 @@ package com.example.nutritionanalysis.network
 
 import com.example.nutritionanalysis.app.API_KEY
 import com.example.nutritionanalysis.app.APP_ID
+import com.example.nutritionanalysis.network.request.IngrRequest
 import com.example.nutritionanalysis.network.response.NutritionDetailsResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
@@ -17,8 +18,8 @@ class FormRemoteDataSource(
 ) : SafeNetworkRequestCaller {
 
 
-    suspend fun getNutritionDetails(ingr: MutableList<String>): Result<NutritionDetailsResponse> {
-        return request { service.getNutritionDetails(APP_ID, API_KEY, ingr) }
+    suspend fun getNutritionDetails(request: IngrRequest): Result<NutritionDetailsResponse> {
+        return request { service.getNutritionDetails(APP_ID, API_KEY, request) }
     }
 
 
