@@ -11,7 +11,7 @@ import com.example.nutritionanalysis.databinding.ItemSummeryBinding
 import com.example.nutritionanalysis.model.IngredientDetails
 import com.example.nutritionanalysis.view.adapter.viewholder.IngredientDetailsViewHolder
 
-class SummeryAdapter () :
+class SummeryAdapter :
     ListAdapter<IngredientDetails, RecyclerView.ViewHolder>(IngredientDetailsDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientDetailsViewHolder {

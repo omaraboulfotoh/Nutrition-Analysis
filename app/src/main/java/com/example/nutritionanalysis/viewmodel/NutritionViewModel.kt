@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.nutritionanalysis.di.IODispatcher
 import com.example.nutritionanalysis.model.IngredientDetails
+import com.example.nutritionanalysis.model.IngredientRow
 import com.example.nutritionanalysis.network.data
 import com.example.nutritionanalysis.network.request.IngrRequest
 import com.example.nutritionanalysis.network.response.NutritionDetailsResponse
@@ -32,6 +33,23 @@ class NutritionViewModel @Inject constructor(
             response.ingredients.forEach {
                 summery.add(it.details[0])
             }
+            emit(summery)
+        }
+
+    fun getDailyBasis(response: NutritionDetailsResponse) =
+        liveData {
+            val summery: MutableList<IngredientRow> = arrayListOf()
+            response.totalDaily["FAT"]?.let { summery.add(it) }
+            response.totalDaily["FASAT"]?.let { summery.add(it) }
+            response.totalDaily["CHOLE"]?.let { summery.add(it) }
+            response.totalDaily["NA"]?.let { summery.add(it) }
+            response.totalDaily["CHOCDF"]?.let { summery.add(it) }
+            response.totalDaily["FIBTG"]?.let { summery.add(it) }
+            response.totalDaily["PROCNT"]?.let { summery.add(it) }
+            response.totalDaily["VITD"]?.let { summery.add(it) }
+            response.totalDaily["CA"]?.let { summery.add(it) }
+            response.totalDaily["FE"]?.let { summery.add(it) }
+            response.totalDaily["K"]?.let { summery.add(it) }
             emit(summery)
         }
 }

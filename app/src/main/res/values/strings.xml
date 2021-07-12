@@ -9,4 +9,5 @@
     <string name="weight">Weight</string>
     <string name="btn_continue">Continue</string>
     <string name="DETAILS_KEY">SummeryBottomSheet.NutritionDetails</string>
+    <string name="fat">Fat</string>
 </resources>
