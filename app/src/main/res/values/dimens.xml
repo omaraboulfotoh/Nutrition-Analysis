@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- font sizes -->
+    <dimen name="normal_font_size">15sp</dimen>
+    <dimen name="small_font_size">12sp</dimen>
+    <dimen name="big_font_size">22sp</dimen>
+    <dimen name="toolbar_font_size">17sp</dimen>
+    <dimen name="button_font_size">17sp</dimen>
+
+    <!--padding-->
+    <dimen name="normal_padding">16dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="tiny_padding">4dp</dimen>
+
+    <!--margin-->
+    <dimen name="tiny_margin">4dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
+    <dimen name="normal_margin">16dp</dimen>
+
+    <!--components attrs -->
+    <dimen name="button_height">50dp</dimen>
+    <dimen name="et_height">45dp</dimen>
+
+    <!--     home header-->
+    <dimen name="home_header">152dp</dimen>
+    <dimen name="big_margin">24dp</dimen>
+
+    <dimen name="dimen_16dp">16dp</dimen>
+    <dimen name="dimen_24dp">24dp</dimen>
+    <dimen name="dimen_32dp">32dp</dimen>
+    <dimen name="dimen_48dp">48dp</dimen>
+    <dimen name="dimen_8dp">8dp</dimen>
+    <dimen name="dimen_4dp">4dp</dimen>
+</resources>
